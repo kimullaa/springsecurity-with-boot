@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<title>USER PAGE</title>
+</head>
+<body>
+	<h1>USER PAGE</h1>
+	<dl>
+		<dt>username</dt>
+		<dd sec:authentication="principal.username"></dd>
+		<dt>authorities</dt>
+		<dd sec:authentication="principal.authorities"></dd>
+	</dl>
+
+	<div sec:authorize="hasRole('ADMIN')">
+		<a th:href="@{/admin}">to admin page</a>
+	</div>
+
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Sign Out" />
+	</form>
+</body>
+</html>
