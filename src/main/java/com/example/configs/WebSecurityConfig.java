@@ -49,10 +49,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService);
     }
 
-    @PostConstruct
-    @Autowired
-    public void customize(FilterSecurityInterceptor interceptor){
-        interceptor.setAlwaysReauthenticate(true);
-    }
-
 }
