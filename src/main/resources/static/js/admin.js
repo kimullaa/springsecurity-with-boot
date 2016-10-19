@@ -5,7 +5,7 @@ $(function () {
             return $(element).val();
         });
 
-        var query = "permisssion=" + permissions.join("&permission=");
+        var query = "permission=" + permissions.join("&permission=");
         var role = $($(this).parent("form").children("input[name=role]")).val();
 
         $.ajax({
