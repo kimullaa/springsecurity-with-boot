@@ -1,4 +1,4 @@
-package com.example;
+package com.example.services;
 
 import com.example.model.User;
 import com.example.repositories.UserRepository;
@@ -21,7 +21,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User target = userRepository.findOne(username);
+        User target = userRepository.findOneByName(username);
         List<SimpleGrantedAuthority> authorities = target.getRoles().stream()
                 .flatMap(i -> i.getPermissions().stream())
                 .map(i -> new SimpleGrantedAuthority(i.getName()))

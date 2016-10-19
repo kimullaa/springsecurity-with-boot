@@ -24,25 +24,25 @@
     <h2>一覧</h2>
     <ul>
         <li>
-            <a href="/user">ユーザページ</a>
+            <a th:href="@{/user}">ユーザページ</a>
             <span sec:authorize="!hasAuthority('SHOW_USER_PAGE')">許可されてません</span>
             <span sec:authorize="hasAuthority('SHOW_USER_PAGE')">許可されてます</span>
         </li>
 
         <li>
-            <a href="/admin">管理者ページ</a>
+            <a th:href="@{/admin}">管理者ページ</a>
             <span sec:authorize="!hasAuthority('SHOW_ADMIN_PAGE')">許可されてません</span>
             <span sec:authorize="hasAuthority('SHOW_ADMIN_PAGE')">許可されてます</span>
         </li>
 
         <li>
-            <a href="/create-user">ユーザ作成</a>
+            <a th:href="@{/create-user}">ユーザ作成</a>
             <span sec:authorize="!hasAuthority('CREATE_USER')">許可されてません</span>
             <span sec:authorize="hasAuthority('CREATE_USER')">許可されてます</span>
         </li>
 
         <li>
-            <a href="/all-user">一覧表示</a>
+            <a th:href="@{/all-user}">一覧表示</a>
             <span sec:authorize="!hasAuthority('SHOW_ALL')">許可されてません</span>
             <span sec:authorize="hasAuthority('SHOW_ALL')">許可されてます</span>
         </li>

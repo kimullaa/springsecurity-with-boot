@@ -1,6 +1,7 @@
 package com.example.controllers;
 
 import com.example.model.Permission;
+import com.example.model.Role;
 import com.example.repositories.PermissionRepository;
 import com.example.repositories.RoleRepository;
 import lombok.AllArgsConstructor;
@@ -23,13 +24,17 @@ public class AdminController {
     public String admin(Model model) {
         model.addAttribute("permissions",
                 StreamSupport.stream(permissionRepository.findAll().spliterator(), false)
-                        .map(i -> i.getName())
-                        .collect(Collectors.toList()));
+                        .collect(Collectors.toMap(
+                                Permission::getId,
+                                Permission::getName
+                        )));
 
         model.addAttribute("roles",
                 StreamSupport.stream(roleRepository.findAll().spliterator(), false)
-                        .map(i -> i.getName())
-                        .collect(Collectors.toList()));
+                        .collect(Collectors.toMap(
+                                Role::getId,
+                                Role::getName
+                        )));
 
         return "admin-page";
     }

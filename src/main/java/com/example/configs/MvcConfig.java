@@ -12,7 +12,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/").setViewName("user-page");
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("user").setViewName("user-page");
-//        registry.addViewController("/admin").setViewName("admin-page"); controllerで処理する
         registry.addViewController("/all-user").setViewName("/all-user-page");
         registry.addViewController("/create-user").setViewName("/create-user-page");
     }

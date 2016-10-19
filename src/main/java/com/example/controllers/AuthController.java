@@ -23,12 +23,14 @@ public class AuthController {
         return user;
     }
 
-    @PutMapping("roles/{name}")
-    public Role putRole(@PathVariable String name, @RequestParam("permission") List<String> permissions) {
+    @PutMapping("roles/{id}")
+    public Role putRole(@PathVariable Long id, @RequestParam("permission") List<Long> permissions) {
         List<Permission> perms = permissions.stream()
                 .map(perm -> new Permission(perm))
                 .collect(Collectors.toList());
-        Role role = new Role(name, perms);
+
+        Role role = roleRepository.findOne(id);
+        role.setPermissions(perms);
         return roleRepository.save(role);
     }
 }

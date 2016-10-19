@@ -11,41 +11,27 @@
 
 <h2>ロールに対する権限を変更する</h2>
 <form th:each="role : ${roles}">
-    <input type="text" name="role" th:attr="value=${role}" disabled="disabled"/>
+    <input type="text" th:attr="value=${role.value}" disabled="disabled"/>
+    <input type="text" name="role" th:attr="value=${role.key}" hidden="hidden"/>
         <span th:each="permission : ${permissions}">
-            <label th:text="${permission}"></label>
-            <input name="permission" type="checkbox" th:value="${permission}"/>
+            <label th:text="${permission.value}"></label>
+            <input name="permission" type="checkbox" th:value="${permission.key}"/>
         </span>
 
-    <button type="button" id="btn">update</button>
+    <button type="button" class="btn">update</button>
 </form>
 
+<a th:href="@{/user}">ユーザページ</a>
+<span sec:authorize="!hasAuthority('SHOW_USER_PAGE')">許可されてません</span>
+<span sec:authorize="hasAuthority('SHOW_USER_PAGE')">許可されてます</span>
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
-<script type="text/javascript">
-    $(function () {
-        $("#btn").on("click", function () {
-
-            var permissions = $.map($(this).parent("form").find("input[type=checkbox]:checked"), function (element, index) {
-                return $(element).val();
-            });
-            var role = $($("#btn").parent("form").children("input")).val();
-
-            $.ajax({
-                method: "PUT",
-                url: `/roles/${role}`,
-                data: permissions,
-            }).done(function (data) {
-                console.log(data);
-            }).fail(function (e) {
-                console.log(e);
-            });
-        });
-    }());
-
+<script th:inline="javascript">
+    var CONTEXT_PATH = /*[[@{/}]]*/ '';
 </script>
+<script th:src="@{/js/admin.js}"></script>
 </body>
 </html>
